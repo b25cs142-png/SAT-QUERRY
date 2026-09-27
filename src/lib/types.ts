@@ -129,12 +129,31 @@ export type RasterSlot = {
   note?: string;
 };
 
+export type ChatAction = {
+  id: string;
+  label: string;
+  action: "highlight" | "evidence" | "change-map" | "switch-view" | "zoom-detection" | "why" | "export-pdf" | "export-geojson" | "show-crops";
+  icon?: string;
+  payload?: any;
+};
+
 export type ChatMessage = {
   id: string;
   role: "user" | "assistant";
   text: string;
   analysis?: AnalysisResult;
+  plan?: any;
+  evidenceSummary?: string;
+  whyExplain?: string[];
+  confidenceScore?: number;
+  confidenceLevel?: "high" | "medium" | "low";
+  modelLabel?: string;
+  isSimulated?: boolean;
+  suggestedQuestions?: string[];
+  actions?: ChatAction[];
+  traceSteps?: Array<{ label: string; status: "ok" | "warn" | "skip"; detail?: string }>;
   createdAt: number;
 };
 
 export type ViewerMode = "primary" | "before" | "split" | "blend" | "diff";
+
